@@ -33,7 +33,7 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0 0.313rem;
+  padding: 0 10.313rem;
   
   img {
     width: 8.75rem;
@@ -46,7 +46,7 @@ const Container = styled.div<ContainerProps>`
 
 const Content = styled.div<ContentProps>`
   display: flex;
-  gap: 0.813rem;
+  gap: 2rem;
 
   span {
     color: ${props => props.textColor};
@@ -55,6 +55,7 @@ const Content = styled.div<ContentProps>`
 
   span:hover {
     cursor: pointer;
+    color: ${props => props.helloVisitantTextColor};
   }
 
   div {
