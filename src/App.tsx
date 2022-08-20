@@ -1,5 +1,6 @@
 import ResetStyle from './styles/Reset';
 
+import Page from './components/Page'
 import Header from './components/Header';
 import HeaderDecoration from './components/HeaderDecoration';
 import Footer from './components/Footer';
@@ -9,10 +10,12 @@ const App = () => {
   return (
     <>
       <ResetStyle />
-      <Header />
-      <HeaderDecoration />
-      <SignIn />
-      <Footer />
+      <Page>
+        <Header />
+        <HeaderDecoration />
+        <SignIn />
+        <Footer />
+      </Page>
     </>
   );
 }
