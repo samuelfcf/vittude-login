@@ -1,4 +1,5 @@
-import * as S from '../styles/SignIn'
+import * as S from '../styles/SignIn';
+import Theme from '../styles/theme';
 
 const SignIn = () => {
 
@@ -7,34 +8,46 @@ const SignIn = () => {
   }
 
   return (
-    <S.Container>
-      <S.Title>Faça seu login</S.Title>
+    <>
+      <S.Title color={Theme.primaryBlack}>Faça seu login</S.Title>
 
-      <S.Form onSubmit={submit} id="signIn">
-        <div>
-          <div>Psicólogo</div>
-          <div>Paciente</div>
-        </div>
+      <S.Container backgroundColor={Theme.backgroundGray}>
+        <S.Form onSubmit={submit} id="signIn">
+          <S.SelectLoginTypeContainar>
+            <div>Psicólogo</div>
+            <div>Paciente</div>
+          </S.SelectLoginTypeContainar>
 
-        <div>
-          <input
-            required
-            type="email"
-            autoFocus
-          />
-          <input
-            required
-            type="password"
-          />
-        </div>
-      </S.Form>
+          <S.InputsDiv>
+            <S.FormSection>
+              <S.Label color={Theme.primaryOrange} htmlFor="email">Email*</S.Label>
+              <S.Input
+                placeholderColor={Theme.placeholdersGray}
+                required
+                type="email"
+                placeholder='Digite seu email'
+                autoFocus
+              />
+            </S.FormSection>
+            <S.FormSection>
+              <S.Label color={Theme.primaryOrange} htmlFor="password">Senha*</S.Label>
+              <S.Input
+                placeholderColor={Theme.placeholdersGray}
+                required
+                type="password"
+                placeholder='Digite sua senha'
+              />
+            </S.FormSection>
+          </S.InputsDiv>
 
-      <S.Button type="submit" form="signIn">Entrar</S.Button>
+          <span>
+            Não é cadastrado? <a href="#" target="_blank">Crie uma conta</a>
+          </span>
+        </S.Form>
 
-      <span>
-        Não é cadastrado? <a href="#" target="_blank">Crie uma conta</a>
-      </span>
-    </S.Container>
+        <S.Button type="submit" form="signIn">Entrar</S.Button>
+      </S.Container>
+    </>
   )
 }
 

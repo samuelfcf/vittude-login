@@ -1,7 +1,17 @@
+import styled from 'styled-components';
+
 const Footer = () => {
   return (
-    <h1>Footer</h1>
+    <Container>Footer</Container>
   )
 }
+
+const Container = styled.footer`
+  position: fixed;
+  bottom: 0;
+  background-color: blue;
+  height: 186px;
+  width: 100%;
+`
 
 export default Footer;

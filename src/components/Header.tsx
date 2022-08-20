@@ -28,9 +28,8 @@ const Header = () => {
 }
 
 const Container = styled.div<ContainerProps>`
-  width: 100%;
   height: 5.438rem;
-  background-color: ${props => props.backgroundColor};
+  background-color:${props => props.backgroundColor};
   display: flex;
   justify-content: space-around;
   align-items: center;

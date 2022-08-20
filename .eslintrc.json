@@ -36,6 +36,12 @@
       "error",
       "single"
     ],
-    "no-duplicate-imports": "error"
+    "no-duplicate-imports": "error",
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "never",
+      }
+    ]
   }
 }
