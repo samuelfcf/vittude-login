@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { ContainerProps, InputProps } from '../types/signIn'
+import { 
+  ContainerProps, 
+  InputProps, 
+  ButtonProps
+} from '../types/signIn'
 
 export const Title = styled.h1`
   color: ${props => props.color};
@@ -33,8 +37,7 @@ export const Form = styled.form`
 export const SelectLoginTypeContainar = styled.div`
   width: 100%;
   display: flex;
-  background-color: yellow;
-  justify-content: center;
+  justify-content: space-around;
 `
 
 export const InputsDiv = styled.div`
@@ -70,10 +73,42 @@ export const Input = styled.input<InputProps>`
   &::placeholder {
     color: ${props => props.placeholderColor}
   }
-
 `
 
-export const Button = styled.button`
-  width: 635px;
+export const LinkPassword = styled.span`
+  text-decoration: underline;
+  color: ${props => props.color};
+  text-align: right;
+
+  &:hover {
+    cursor: pointer
+  }
+`
+
+export const Button = styled.button<ButtonProps>`
+  width: 39.688rem;
+  height: 3.625rem;
+  font-size: 1.3rem;
+  font-weight: bold;
   margin: 0 auto;
+  border: none;
+  background-color: ${props => props.backgroundColor};
+  color: ${props => props.color};
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+export const CreateAccountText = styled.span`
+  display: block;
+  text-align: center;
+  margin: 1.313rem auto 0 auto;
+  font-size: 1.2rem;
+
+  a {
+    text-decoration: underline;
+    color: ${props => props.color};
+    font-weight: 600;
+  }
 `
