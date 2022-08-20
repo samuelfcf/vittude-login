@@ -1,10 +1,16 @@
-import ResetStyle from './styles/Reset'
+import ResetStyle from './styles/Reset';
+
+import Header from './components/Header';
+import Footer from './components/Footer';
+import SignIn from './pages/SignIn';
 
 const App = () => {
   return (
     <>
       <ResetStyle />
-      <h1>Vittude Login</h1>
+      <Header />
+      <SignIn />
+      <Footer />
     </>
   );
 }
