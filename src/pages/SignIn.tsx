@@ -49,11 +49,13 @@ const SignIn = () => {
       }
 
       api.auth.psicoSignIn(body)
-        .then((res: AxiosResponse) => {
-          console.log('Deu certo!', res.data)
+        .then(async (res: AxiosResponse) => {
+          addOrRemoveLocalStorageData(res.data);
+          return await Modal.success();
         })
-        .catch((err: AxiosError) => {
-          console.log('Error', err.response)
+        .catch(async (err: AxiosError) => {
+          console.log('Error', err.response);
+          return await Modal.error();
         });
 
       setDisable(false);

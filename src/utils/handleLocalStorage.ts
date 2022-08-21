@@ -3,7 +3,6 @@ const addOrRemoveLocalStorageData = (data: string) => {
 
   if (user) {
     localStorage.removeItem('token');
-    return;
   }
 
   localStorage.setItem('token', JSON.stringify(data))
