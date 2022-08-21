@@ -10,7 +10,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 
 import useApi from '../hooks/useApi';
 import Modal from '../utils/Modal';
-import { BsArrowReturnRight } from 'react-icons/bs';
+import addOrRemoveLocalStorageData from '../utils/handleLocalStorage';
 
 const SignIn = () => {
 
@@ -60,11 +60,12 @@ const SignIn = () => {
 
     api.auth.patientSignIn(body)
       .then(async (res: AxiosResponse) => {
-        return await Modal.success()
+        addOrRemoveLocalStorageData(res.data);
+        return await Modal.success();
       })
       .catch(async (err: AxiosError) => {
         console.log(err.response);
-        return await Modal.error()
+        return await Modal.error();
       })
 
     setDisable(false);
@@ -101,6 +102,7 @@ const SignIn = () => {
                 placeholderColor={Theme.placeholdersGray}
                 required
                 type={loginType === 'Paciente' ? 'email' : 'text'}
+                maxLength={loginType === 'Paciente' ? 100 : 11}
                 placeholder={loginType === 'Paciente' ? 'Digite seu email' : '999.999.999-99'}
               />
             </S.FormSection>

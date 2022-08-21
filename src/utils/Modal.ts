@@ -2,8 +2,8 @@ import swal from 'sweetalert';
 
 class Modal {
   error = async () => {
-    await swal('Credenciais Inválidas', {
-      title: 'Error',
+    await swal('Por favor, tente novamente', {
+      title: 'Credenciais Inválidas',
       icon: 'error'
     })
   }
