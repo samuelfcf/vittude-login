@@ -1,20 +1,64 @@
+import { useState } from 'react';
 import * as S from '../styles/signIn';
 import Theme from '../styles/theme';
+
 import LoginType from '../components/LoginType';
 import loginTypesData from '../utils/loginTypesData';
-import { useState } from 'react';
+
+import { InputDataProps } from '../types/signIn';
+import { AxiosError, AxiosResponse } from 'axios';
+
+import useApi from '../hooks/useApi';
 
 const SignIn = () => {
 
   const [loginType, setLoginType] = useState<string>('Paciente');
-  const [disable, setDisable] = useState<boolean>(true)
+  const [disable, setDisable] = useState<boolean>(true);
+  const [inputData, setInputData] = useState<InputDataProps>({
+    identifier: '',
+    password: ''
+  });
+
+  const api = useApi();
 
   const selectLoginType = (type: string) => {
     setLoginType(type);
   }
 
-  const submit = () => {
-    return alert('Submit')
+
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setDisable(false);
+
+    if (loginType === 'Psicólogo') {
+      const body = {
+        document: inputData.identifier,
+        password: inputData.password
+      }
+
+      api.auth.psicoSignIn(body)
+        .then((res: AxiosResponse) => {
+          console.log('Deu certo!', res)
+        })
+        .catch((err: AxiosError) => {
+          console.log('Error', err)
+        });
+    }
+
+    const body = {
+      email: inputData.identifier,
+      password: inputData.password
+    }
+
+    api.auth.patientSignIn(body)
+      .then((res: AxiosResponse) => {
+        console.log('Deu certo!!', res)
+      })
+      .catch((err: AxiosError) => {
+        console.log('Erro', err)
+      })
+
+    setDisable(true);
   }
 
   return (

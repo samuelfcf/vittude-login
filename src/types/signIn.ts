@@ -13,3 +13,8 @@ export type ButtonProps = {
   backgroundColor: string;
   disabled: boolean;
 }
+
+export type InputDataProps = {
+  identifier: string;
+  password: string;
+}
