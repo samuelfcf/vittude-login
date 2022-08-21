@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from '../styles/signIn';
 import Theme from '../styles/theme';
 
@@ -22,6 +22,13 @@ const SignIn = () => {
   });
 
   const api = useApi();
+
+  useEffect(() => {
+    setInputData({
+      identifier: '',
+      password: ''
+    })
+  }, [loginType]);
 
   const selectLoginType = (type: string) => {
     setLoginType(type);
