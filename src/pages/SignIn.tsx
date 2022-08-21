@@ -3,7 +3,7 @@ import patientOrange from '../assets/paciente-terracota.svg';
 import psicoGray from '../assets/psico-cinza.svg';
 import psicoOrange from '../assets/psico-orange.svg';
 
-import * as S from '../styles/SignIn';
+import * as S from '../styles/signIn';
 import Theme from '../styles/theme';
 import LoginType from '../components/LoginType';
 
@@ -52,7 +52,6 @@ const SignIn = () => {
                 required
                 type="email"
                 placeholder='Digite seu email'
-                autoFocus
               />
             </S.FormSection>
             <S.FormSection>

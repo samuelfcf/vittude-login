@@ -72,6 +72,7 @@ export const Input = styled.input<InputProps>`
 
   &::placeholder {
     color: ${props => props.placeholderColor}
+
   }
 `
 

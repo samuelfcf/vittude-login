@@ -1,4 +1,4 @@
-import ResetStyle from './styles/Reset';
+import ResetStyle from './styles/reset';
 
 import Page from './components/Page'
 import Header from './components/Header';
