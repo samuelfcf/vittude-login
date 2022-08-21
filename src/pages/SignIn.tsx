@@ -9,11 +9,13 @@ import { InputDataProps } from '../types/signIn';
 import { AxiosError, AxiosResponse } from 'axios';
 
 import useApi from '../hooks/useApi';
+import Modal from '../utils/Modal';
+import { BsArrowReturnRight } from 'react-icons/bs';
 
 const SignIn = () => {
 
   const [loginType, setLoginType] = useState<string>('Paciente');
-  const [disable, setDisable] = useState<boolean>(true);
+  const [disable, setDisable] = useState<boolean>(false);
   const [inputData, setInputData] = useState<InputDataProps>({
     identifier: '',
     password: ''
@@ -25,10 +27,13 @@ const SignIn = () => {
     setLoginType(type);
   }
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputData({ ...inputData, [event.target.name]: event.target.value });
+  }
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setDisable(false);
+    setDisable(true);
 
     if (loginType === 'Psicólogo') {
       const body = {
@@ -38,11 +43,14 @@ const SignIn = () => {
 
       api.auth.psicoSignIn(body)
         .then((res: AxiosResponse) => {
-          console.log('Deu certo!', res)
+          console.log('Deu certo!', res.data)
         })
         .catch((err: AxiosError) => {
-          console.log('Error', err)
+          console.log('Error', err.response)
         });
+
+      setDisable(false);
+      return;
     }
 
     const body = {
@@ -51,14 +59,15 @@ const SignIn = () => {
     }
 
     api.auth.patientSignIn(body)
-      .then((res: AxiosResponse) => {
-        console.log('Deu certo!!', res)
+      .then(async (res: AxiosResponse) => {
+        return await Modal.success()
       })
-      .catch((err: AxiosError) => {
-        console.log('Erro', err)
+      .catch(async (err: AxiosError) => {
+        console.log(err.response);
+        return await Modal.error()
       })
 
-    setDisable(true);
+    setDisable(false);
   }
 
   return (
@@ -86,6 +95,9 @@ const SignIn = () => {
                 {loginType === 'Paciente' ? 'Email*' : 'CPF/CNPJ*'}
               </S.Label>
               <S.Input
+                name='identifier'
+                value={inputData.identifier}
+                onChange={handleChange}
                 placeholderColor={Theme.placeholdersGray}
                 required
                 type={loginType === 'Paciente' ? 'email' : 'text'}
@@ -95,6 +107,9 @@ const SignIn = () => {
             <S.FormSection>
               <S.Label color={Theme.primaryOrange} htmlFor="password">Senha*</S.Label>
               <S.Input
+                name='password'
+                value={inputData.password}
+                onChange={handleChange}
                 placeholderColor={Theme.placeholdersGray}
                 required
                 type="password"

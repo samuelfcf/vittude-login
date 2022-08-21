@@ -11,12 +11,12 @@ interface PsicoSignInParameters extends Omit<PatientSignInParameters, 'email'> {
 
 class Auth {
   patientSignIn = async (body: PatientSignInParameters) => {
-    const response = await api.post('/auth/psico', body);
+    const response = await api.post('/auth/patient', body);
     return response;
   }
 
   psicoSignIn = async (body: PsicoSignInParameters) => {
-    const response = await api.post('/auth/patient', body);
+    const response = await api.post('/auth/psico', body);
     return response;
   }
 }
