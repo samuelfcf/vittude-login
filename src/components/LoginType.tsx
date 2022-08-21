@@ -1,32 +1,50 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Theme from '../styles/theme';
 
 type Props = {
-  imgSrc: string;
+  selectedIcon: string;
+  notSelectedIcon: string;
   isSelected: boolean;
   loginType: string;
+  selectLoginType: (arg0: string) => void;
 }
 
-type LoginTypeProps = {
+type ContainerProps = {
   isSelected: boolean;
   selectedTextColor: string;
   notSelectedTextColor: string;
 }
 
-const LoginType = ({ imgSrc, isSelected, loginType }: Props) => {
+const LoginType = ({ selectedIcon, notSelectedIcon, isSelected, loginType, selectLoginType }: Props) => {
+
+  const [selected, setSelected] = useState<boolean>(isSelected)
+
+  useEffect(() => {
+    setSelected(isSelected)
+  }, [isSelected])
+
+  const select = (loginType: string) => {
+    if (selected) return;
+
+    selectLoginType(loginType);
+    setSelected(!selected);
+  }
+
   return (
     <Container
-      isSelected={isSelected}
+      isSelected={selected}
       selectedTextColor={Theme.primaryBlack}
       notSelectedTextColor={Theme.notSelectedFont}
+      onClick={() => select(loginType)}
     >
-      <img src={imgSrc} />
+      <img src={selected ? selectedIcon : notSelectedIcon} />
       <span>{loginType}</span>
     </Container>
   )
 }
 
-export const Container = styled.div<LoginTypeProps>`
+export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: flex-end;
   gap: 0.625rem;

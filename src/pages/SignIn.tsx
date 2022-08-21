@@ -1,9 +1,16 @@
 import * as S from '../styles/signIn';
 import Theme from '../styles/theme';
 import LoginType from '../components/LoginType';
-import loginTypesData from '../utils/loginTypesData'
+import loginTypesData from '../utils/loginTypesData';
+import { useState } from 'react';
 
 const SignIn = () => {
+
+  const [loginType, setLoginType] = useState<string>('Paciente');
+
+  const selectLoginType = (type: string) => {
+    setLoginType(type);
+  }
 
   const submit = () => {
     return alert('Submit')
@@ -19,21 +26,25 @@ const SignIn = () => {
             {loginTypesData.map((type, index) => (
               <LoginType
                 key={index}
-                imgSrc={type.isSelected ? type.selectedIcon : type.notSelectedIcon}
-                isSelected={type.isSelected}
+                selectedIcon={type.selectedIcon}
+                notSelectedIcon={type.notSelectedIcon}
+                isSelected={type.loginType === loginType}
                 loginType={type.loginType}
+                selectLoginType={selectLoginType}
               />
             ))}
           </S.SelectLoginTypeContainar>
 
           <S.InputsDiv>
             <S.FormSection>
-              <S.Label color={Theme.primaryOrange} htmlFor="email">Email*</S.Label>
+              <S.Label color={Theme.primaryOrange} htmlFor={loginType === 'Paciente' ? 'email' : 'text'}>
+                {loginType === 'Paciente' ? 'Email*' : 'CPF/CNPJ*'}
+              </S.Label>
               <S.Input
                 placeholderColor={Theme.placeholdersGray}
                 required
-                type="email"
-                placeholder='Digite seu email'
+                type={loginType === 'Paciente' ? 'email' : 'text'}
+                placeholder={loginType === 'Paciente' ? 'Digite seu email' : '999.999.999-99'}
               />
             </S.FormSection>
             <S.FormSection>
