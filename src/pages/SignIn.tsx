@@ -1,27 +1,9 @@
-import patientGray from '../assets/paciente-cinza.svg';
-import patientOrange from '../assets/paciente-terracota.svg';
-import psicoGray from '../assets/psico-cinza.svg';
-import psicoOrange from '../assets/psico-orange.svg';
-
 import * as S from '../styles/signIn';
 import Theme from '../styles/theme';
 import LoginType from '../components/LoginType';
+import loginTypesData from '../utils/loginTypesData'
 
 const SignIn = () => {
-  const loginTypes = [
-    {
-      isSelected: false,
-      loginType: 'Psicólogo',
-      selectedIcon: psicoOrange,
-      notSelectedIcon: psicoGray
-    },
-    {
-      isSelected: true,
-      loginType: 'Paciente',
-      selectedIcon: patientOrange,
-      notSelectedIcon: patientGray
-    }
-  ]
 
   const submit = () => {
     return alert('Submit')
@@ -34,7 +16,7 @@ const SignIn = () => {
       <S.Container backgroundColor={Theme.backgroundGray}>
         <S.Form onSubmit={submit} id='signIn'>
           <S.SelectLoginTypeContainar>
-            {loginTypes.map((type, index) => (
+            {loginTypesData.map((type, index) => (
               <LoginType
                 key={index}
                 imgSrc={type.isSelected ? type.selectedIcon : type.notSelectedIcon}
