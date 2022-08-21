@@ -7,6 +7,7 @@ import { useState } from 'react';
 const SignIn = () => {
 
   const [loginType, setLoginType] = useState<string>('Paciente');
+  const [disable, setDisable] = useState<boolean>(true)
 
   const selectLoginType = (type: string) => {
     setLoginType(type);
@@ -69,7 +70,7 @@ const SignIn = () => {
           form="signIn"
           color={Theme.primaryWhite}
           backgroundColor={Theme.primaryOrange}
-          disabled={true}
+          disabled={disable}
         >
           Entrar
         </S.Button>
