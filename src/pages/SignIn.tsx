@@ -24,11 +24,15 @@ const SignIn = () => {
   const api = useApi();
 
   useEffect(() => {
+    clearInputs();
+  }, [loginType]);
+
+  const clearInputs = () => {
     setInputData({
       identifier: '',
       password: ''
-    })
-  }, [loginType]);
+    });
+  }
 
   const selectLoginType = (type: string) => {
     setLoginType(type);
