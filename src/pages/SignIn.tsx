@@ -12,6 +12,7 @@ import { isCPF } from 'brazilian-values';
 import useApi from '../hooks/useApi';
 import Modal from '../utils/Modal';
 import addOrRemoveLocalStorageData from '../utils/handleLocalStorage';
+import StatusCode from '../utils/statusCode';
 
 const SignIn = () => {
 
@@ -47,7 +48,7 @@ const SignIn = () => {
     event.preventDefault();
     setDisable(true);
 
-    if (loginType === 'Psicólogo') {
+    if (loginType !== defaultLoginType) {
       const body = {
         document: inputData.identifier,
         password: inputData.password
@@ -65,7 +66,16 @@ const SignIn = () => {
           return await Modal.success();
         })
         .catch(async (err: AxiosError) => {
-          console.log('Error', err.response);
+          if (err.response) {
+            if (err.response.status === StatusCode.BAD_REQUEST) {
+              return await Modal.credentialsError();
+            }
+
+            if (err.response.status === StatusCode.NOT_FOUND) {
+              return await Modal.userNotFound();
+            }
+          }
+
           return await Modal.error();
         });
 
@@ -84,7 +94,16 @@ const SignIn = () => {
         return await Modal.success();
       })
       .catch(async (err: AxiosError) => {
-        console.log(err.response);
+        if (err.response) {
+          if (err.response.status === StatusCode.BAD_REQUEST) {
+            return await Modal.credentialsError();
+          }
+
+          if (err.response.status === StatusCode.NOT_FOUND) {
+            return await Modal.userNotFound();
+          }
+        }
+
         return await Modal.error();
       })
 
