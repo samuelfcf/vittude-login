@@ -1,5 +1,5 @@
 <h1 align="center">
-   🛍️ <a href="#"> Vittude Login </a>
+   <a href="#"> Vittude Login </a>
 </h1>
 
 <h4 align="center"> 
