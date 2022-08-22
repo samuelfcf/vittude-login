@@ -3,10 +3,11 @@ import * as S from '../styles/signIn';
 import Theme from '../styles/theme';
 
 import LoginType from '../components/LoginType';
-import loginTypesData from '../utils/loginTypesData';
+import loginTypesData, { defaultLoginType } from '../utils/loginTypesData';
 
 import { InputDataProps } from '../types/signIn';
 import { AxiosError, AxiosResponse } from 'axios';
+import { isCPF } from 'brazilian-values';
 
 import useApi from '../hooks/useApi';
 import Modal from '../utils/Modal';
@@ -14,7 +15,7 @@ import addOrRemoveLocalStorageData from '../utils/handleLocalStorage';
 
 const SignIn = () => {
 
-  const [loginType, setLoginType] = useState<string>('Paciente');
+  const [loginType, setLoginType] = useState<string>(defaultLoginType);
   const [disable, setDisable] = useState<boolean>(false);
   const [inputData, setInputData] = useState<InputDataProps>({
     identifier: '',
@@ -42,7 +43,7 @@ const SignIn = () => {
     setInputData({ ...inputData, [event.target.name]: event.target.value });
   }
 
-  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setDisable(true);
 
@@ -50,6 +51,12 @@ const SignIn = () => {
       const body = {
         document: inputData.identifier,
         password: inputData.password
+      }
+
+      if (!isCPF(body.document)) {
+        await Modal.invalidDocument();
+        setDisable(false);
+        return;
       }
 
       api.auth.psicoSignIn(body)
@@ -105,8 +112,8 @@ const SignIn = () => {
 
           <S.InputsDiv>
             <S.FormSection>
-              <S.Label color={Theme.primaryOrange} htmlFor={loginType === 'Paciente' ? 'email' : 'text'}>
-                {loginType === 'Paciente' ? 'Email*' : 'CPF/CNPJ*'}
+              <S.Label color={Theme.primaryOrange} htmlFor={loginType === defaultLoginType ? 'email' : 'text'}>
+                {loginType === defaultLoginType ? 'Email*' : 'CPF/CNPJ*'}
               </S.Label>
               <S.Input
                 name='identifier'
@@ -114,9 +121,9 @@ const SignIn = () => {
                 onChange={handleChange}
                 placeholderColor={Theme.placeholdersGray}
                 required
-                type={loginType === 'Paciente' ? 'email' : 'text'}
-                maxLength={loginType === 'Paciente' ? 100 : 11}
-                placeholder={loginType === 'Paciente' ? 'Digite seu email' : '999.999.999-99'}
+                type={loginType === defaultLoginType ? 'email' : 'text'}
+                maxLength={loginType === defaultLoginType ? 100 : 11}
+                placeholder={loginType === defaultLoginType ? 'Digite seu email' : '999.999.999-99'}
               />
             </S.FormSection>
             <S.FormSection>
