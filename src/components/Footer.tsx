@@ -27,44 +27,50 @@ const Footer = () => {
 
 const Container = styled.footer<FooterProps>`
   color: ${props => props.color};
-  position: fixed;
+  position: absolute;
   bottom: 0;
   background-color: ${props => props.backgroundColor};
-  height: 186px;
+  height: 11.625rem;
   width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 3.125rem;
+
+  @media (max-width: 85.625rem) {
+    max-height: 6.875rem;
+    position: static;
+    margin-top: 1.25rem;
+  }
 `
 
 const ResponsableInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 
   span {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
   
   p {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 `
 
 const Alert = styled.div<AlertProps>`
   display: flex;
-  gap: 21px;
+  gap: 1.313rem;
 
   p {
     text-align: left;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 1rem;
+    line-height: 1.5rem;
     word-break: keep-all;
     display: block;
-    width: 639px;
+    width: 39.938rem;
 
     span {
       font-weight: bold;

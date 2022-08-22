@@ -8,10 +8,15 @@ import {
 export const Title = styled.h1`
   color: ${props => props.color};
   margin-top: 3rem;
-  margin-bottom: 36px;
+  margin-bottom: 2.25rem;
   font-size: 1.75rem;
   font-weight: 400;
   text-align: center;
+
+  @media (max-width: 85.625rem) {
+    margin-top: 1.3rem;
+    margin-bottom: 1.563rem;;
+  }
 `
 
 export const Container = styled.div<ContainerProps>`
@@ -19,6 +24,7 @@ export const Container = styled.div<ContainerProps>`
   flex-direction: column;
   margin: 0 auto;
   width: 39.688rem;
+  max-height: 37.5rem;
   background-color: ${props => props.backgroundColor};
 `
 
@@ -33,11 +39,21 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
+  @media (max-width: 85.625rem) {
+    justify-content: flex-start;
+    height: 20.125rem;
+  }
 `
 export const SelectLoginTypeContainar = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
+
+  @media (max-width: 85.625rem) {
+    margin-top: 1.25rem;
+    margin-bottom: 1.875rem;
+  }
 `
 
 export const InputsDiv = styled.div`
@@ -47,7 +63,7 @@ export const InputsDiv = styled.div`
 `
 
 export const FormSection = styled.div`
-  width: calc(100vw - 95rem);
+  width: 30rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -63,16 +79,14 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input<InputProps>`
-  border-color: inherit;
   border-style: none;
   font-weight: 100;
-  font-size: 20px;
+  font-size: 1.25rem;
   outline: none;
   padding: 0;
 
   &::placeholder {
     color: ${props => props.placeholderColor}
-
   }
 `
 

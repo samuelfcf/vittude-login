@@ -29,18 +29,22 @@ const Header = () => {
 
 const Container = styled.div<ContainerProps>`
   height: 5.438rem;
-  background-color:${props => props.backgroundColor};
+  background-color: ${props => props.backgroundColor};
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 0 10.313rem;
-  
+
   img {
     width: 8.75rem;
   }
 
   img:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: 85.625rem) {
+    justify-content: space-between;
   }
 `
 
@@ -71,12 +75,19 @@ const Content = styled.div<ContentProps>`
   div:hover {
     cursor: pointer;
   }
+
+  @media (max-width: 85.625rem) {
+    width: 100%;
+    justify-content: flex-end;
+  }
 `
 
 const Divider = styled.div`
   transform: rotate(-90deg);
   border-bottom: 0.125rem solid #f3f3f3;
   width: 2rem;
+
+  
 `
 
 export default Header;
